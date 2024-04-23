@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { act } from "react-dom/test-utils";
-import { Appointment } from "../src/Appointment";
+import { Appointment, AppointmentsDayView } from "../src/Appointment";
 
 describe("Appointment", () => {
   let container;
@@ -27,5 +27,24 @@ describe("Appointment", () => {
 
     render(<Appointment customer={customer} />);
     expect(document.body.textContent).toContain("Jaqueline");
+  });
+});
+
+describe("AppointmentsDayView", () => {
+  let container;
+  berforeEach(() => {
+    container = document.createElement("div");
+    document.body.replaceChildren(container);
+  });
+
+  const render = (component) =>
+    act(() => {
+      React.createRoot(container).render(component);
+    });
+
+  it("renders a div with the right id", () => {
+    render(<AppointmentsDayView appointments={[]} />);
+
+    expect(document.querySelector("div#appointmentsDayView")).not.toBeNull();
   });
 });
